@@ -12,24 +12,30 @@ data = [
 
 
 def create_tables():
-    with sqlite3.connect("vk_chat_bot.db") as connection:
+    """
+    Создание базы данных sqlite3.
+    2 таблицы.
+    categories: id, category_name.
+    items: id, item_name, description, category_id, link
+    """
+    with sqlite3.connect("db/vk_chat_bot.db") as connection:
         cur = connection.cursor()
 
         sqlite_query = """
             CREATE TABLE IF NOT EXISTS categories (
-                Id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                Category_name VARCHAR(255)
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                category_name VARCHAR(255)
             )
         """
         cur.execute(sqlite_query)
 
         sqlite_query = """
             CREATE TABLE IF NOT EXISTS items (
-                Id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                Item_name VARCHAR(255),
-                Description TEXT, 
-                Category_id INT,
-                Link VARCHAR(255),
+                id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                item_name VARCHAR(255),
+                description TEXT, 
+                category_id INT,
+                link VARCHAR(255),
                 FOREIGN KEY (Category_id) REFERENCES categories (Id)
             )
         """
@@ -38,15 +44,18 @@ def create_tables():
 
 
 def add_data():
-    with sqlite3.connect("vk_chat_bot.db") as connection:
+    """
+    Заполнение базы данных
+    """
+    with sqlite3.connect("db/vk_chat_bot.db") as connection:
         cur = connection.cursor()
         sqlite_query = """
-        INSERT INTO categories (Category_name)
+        INSERT INTO categories (category_name)
         VALUES ('Выпечка'), ('Кондитерская'), ('Торты');"""
         cur.execute(sqlite_query)
 
         sqlite_query = """
-        INSERT INTO items (Item_name, Description, Category_id, Link)
+        INSERT INTO items (item_name, description, category_id, link)
         VALUES (?, ?, ?, ?);"""
         cur.executemany(sqlite_query, data)
         connection.commit()

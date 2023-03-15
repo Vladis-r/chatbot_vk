@@ -28,8 +28,8 @@ class QueryItem:
             sqlite_query = """
                 SELECT *
                 FROM items
-                WHERE Item_name = ?
-                AND Category_id = ?"""
+                WHERE item_name = ?
+                AND category_id = ?"""
             cur.execute(sqlite_query, (item_name, self.category_pk))
             return cur.fetchone()
 
@@ -58,6 +58,6 @@ class QueryCategory:
             sqlite_query = """
                 SELECT *
                 FROM categories
-                WHERE Category_name = ?"""
+                WHERE category_name = ?"""
             cur.execute(sqlite_query, (category_name,))
             return cur.fetchone()

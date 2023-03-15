@@ -48,7 +48,8 @@ class BotRunner:
                 yield send_message("Нет такого продукта", event.user_id, keyboard=self.keyboards[self.bot_condition])
 
 
-bot_runner = BotRunner()
-for event in longpoll.listen():
-    if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-        next(bot_runner.run_bot())
+if __name__ == "__main__":
+    bot_runner = BotRunner()
+    for event in longpoll.listen():
+        if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+            next(bot_runner.run_bot())
