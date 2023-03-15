@@ -2,8 +2,12 @@ import sqlite3
 
 
 class QueryItem:
-    def __init__(self, item_name, condition):
-        self.category_pk = condition - 2
+    """
+    Класс для запросов в бд в таблицу items
+    """
+
+    def __init__(self, item_name: str, condition: int):
+        self.category_pk: int = condition - 2
 
         if item := self._get_item_name(item_name):
             self.item_name = item_name
@@ -22,7 +26,10 @@ class QueryItem:
             return True
         return False
 
-    def _get_item_name(self, item_name):
+    def _get_item_name(self, item_name: str):
+        """
+        Запрос в бд по имени товара, учитывая его категорию
+        """
         with sqlite3.connect("db/vk_chat_bot.db") as connection:
             cur = connection.cursor()
             sqlite_query = """
@@ -35,7 +42,11 @@ class QueryItem:
 
 
 class QueryCategory:
-    def __init__(self, category_name, condition):
+    """
+    Класс для запросов в бд в таблицу categories
+    """
+
+    def __init__(self, category_name: str, condition: int):
         if category := self._get_category_name(category_name):
             self.category_name = category_name
             self.category_pk = category[0]
@@ -52,7 +63,10 @@ class QueryCategory:
             return True
         return False
 
-    def _get_category_name(self, category_name):
+    def _get_category_name(self, category_name: str):
+        """
+        Запрос в бд по имени категории
+        """
         with sqlite3.connect("db/vk_chat_bot.db") as connection:
             cur = connection.cursor()
             sqlite_query = """

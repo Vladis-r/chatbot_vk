@@ -4,7 +4,12 @@ from vk_api.utils import get_random_id
 from server import vk
 
 
-def get_attachment_photo(photo):
+def get_attachment_photo(photo: str):
+    """
+    Загружает фото на сервер вк.
+    :param photo: путь к фото.
+    :return: Возвращает ссылку на фото.
+    """
     upload = vk_api.VkUpload(vk)
     photo = upload.photo_messages(photo)
     owner_id = photo[0]['owner_id']
@@ -15,7 +20,14 @@ def get_attachment_photo(photo):
     return attachment
 
 
-def send_message(message: str, user_id, keyboard=None, attachment=None):
+def send_message(message: str, user_id: int, keyboard=None, attachment=None):
+    """
+    Отправка сообщений в чат сообщества.
+    :param message: текст сообщения
+    :param user_id: ид пользователя
+    :param keyboard: клавиатура, если есть.
+    :param attachment: фото, если есть.
+    """
     if keyboard:
         vk.messages.send(
             user_id=user_id,

@@ -8,9 +8,10 @@
 
 
 # Для запуска:
-- Установить виртуальное окружение:
+- Установить виртуальное окружение (и активировать его):
 
         python -m venv venv
+        venv\Scripts\activate.bat - активация для Windows
 - Установить зависимости:
  
         pip install -r requirements.txt
@@ -22,3 +23,10 @@
 
         python main.py
 
+# При запуске с помощью docker:
+- создать контейнер:
+
+        docker build -t <container_name>
+- запустить контейнер (необходимо передать аргумент <vk_token>):
+
+        docker run --build-arg token=<vk_token> -t <container_name> .
