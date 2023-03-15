@@ -2,9 +2,7 @@ from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 keyboard_start = VkKeyboard(one_time=True)
 keyboard_start.add_button('Выпечка', color=VkKeyboardColor.PRIMARY)
-# keyboard_start.add_line()
 keyboard_start.add_button('Кондитерская', color=VkKeyboardColor.PRIMARY)
-# keyboard_start.add_line()
 keyboard_start.add_button('Торты', color=VkKeyboardColor.PRIMARY)
 
 keyboard_bakery = VkKeyboard(one_time=True)
