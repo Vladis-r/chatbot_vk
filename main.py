@@ -21,6 +21,10 @@ class BotRunner:
                           5: keyboard_cakes}
 
     def run_bot(self):
+        """
+        Основная функция для взаимодействия с пользователем.
+        В зависимости от состояния <bot_condition>, меняются варианты взаимодействия.
+        """
         while self.bot_condition == 1:
             self.bot_condition += 1
             yield send_message('Добро пожаловать в нашу пекарню! Выберите раздел:', event.user_id,
